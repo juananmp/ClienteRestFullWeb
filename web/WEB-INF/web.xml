@@ -17,8 +17,12 @@
         <servlet-class>Rest.MainRest</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginBBDD</servlet-name>
-        <servlet-class>Rest.LoginBBDD</servlet-class>
+        <servlet-name>CheckUserPassword</servlet-name>
+        <servlet-class>Rest.CheckUserPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Menu</servlet-name>
+        <servlet-class>Rest.Menu</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
@@ -37,8 +41,12 @@
         <url-pattern>/MainRest</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoginBBDD</servlet-name>
-        <url-pattern>/LoginBBDD</url-pattern>
+        <servlet-name>CheckUserPassword</servlet-name>
+        <url-pattern>/CheckUserPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Menu</servlet-name>
+        <url-pattern>/Menu</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
