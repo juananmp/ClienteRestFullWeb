@@ -78,7 +78,7 @@ public class RegistroUser extends HttpServlet {
            
             CreateUser c = new CreateUser();
             c.putXml(u);
-           response.sendRedirect("/ClienteRestFullWeb/index.html");
+           response.sendRedirect("/ClienteRestFullWeb/exitoRegistro.html");
            
 
             
