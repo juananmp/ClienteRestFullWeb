@@ -71,6 +71,7 @@ public class CheckUserPassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        
         Statement statement = null;
         Connection connection = null;
         String user = request.getParameter("user");
@@ -88,6 +89,8 @@ public class CheckUserPassword extends HttpServlet {
         cliente.setAttribute("password", password);
 
         if(!token.isEmpty() && token!=""){
+            //meto el token en la sesion para posteriormente usarlo en el menu y pasarselo a mostraragendaservicio
+            cliente.setAttribute("Token", token);
            response.sendRedirect("/ClienteRestFullWeb/Menu");
         }else{
                  response.sendRedirect("/ClienteRestFullWeb/errorUser.html");

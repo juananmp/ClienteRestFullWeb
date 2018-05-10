@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,32 +34,32 @@ public class Menu extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+            HttpSession cliente = request.getSession();
             
          
            // mas.getXml(MostrarAgendaServicio.class);
             
                     
             /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet Menu</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1> Prueba del LOGIN</h1>");
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Menu</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1> Prueba del LOGIN</h1>");
 
                MostrarAgenda ma = new MostrarAgenda();
             MostrarAgendaServicio mas = new MostrarAgendaServicio();
-            
-            ma = mas.getXml(MostrarAgenda.class);
+            //le paso la clase y el token 
+            ma = mas.getXml(MostrarAgenda.class, (String)cliente.getAttribute("Token"));
             System.out.println("------------------>"+ma);
             System.out.println(mas);
             System.out.println(ma.getAgenda().toString());
-//            out.println("<h1>" + ma + "</h1>");
-//            out.println("<h1>Servlet Menu at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
+            out.println("<h1>" + ma.getAgenda().toString() + "</h1>");
+            out.println("<h1>Servlet Menu at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

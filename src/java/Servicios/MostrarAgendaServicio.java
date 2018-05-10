@@ -34,10 +34,10 @@ public class MostrarAgendaServicio {
         webTarget = client.target(BASE_URI).path("seleccionarAgenda");
     }
 
-    public <T> T getXml(Class<T> responseType) throws ClientErrorException {
+    public <T> T getXml(Class<T> responseType, String token) throws ClientErrorException {
         WebTarget resource = webTarget;
         
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).header(HttpHeaders.AUTHORIZATION, "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoianVhbiJ9.UVuJjz-lZThM8dOQPyx6gAfJj2IyWSprURW03fSnHeM").get(responseType);
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).header(HttpHeaders.AUTHORIZATION, token).get(responseType);
     }
 
     public void close() {
