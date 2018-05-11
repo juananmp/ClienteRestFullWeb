@@ -5,12 +5,8 @@
  */
 package Rest;
 
-import Objetos.MostrarAgenda;
-import Servicios.MostrarAgendaServicio;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author janto
  */
-public class Menu extends HttpServlet {
+public class MenuAgenda extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,44 +30,46 @@ public class Menu extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+               response.setContentType("text/html;charset=UTF-8");
+        String idagenda = request.getParameter("idAgenda");
+        HttpSession cliente = request.getSession();
+        
+        if(idagenda!=null){
+           cliente.setAttribute("idAgenda", idagenda); 
+        }
+       
         try (PrintWriter out = response.getWriter()) {
-            HttpSession cliente = request.getSession();
-            
-         
-           // mas.getXml(MostrarAgendaServicio.class);
-            
-                     MostrarAgenda ma = new MostrarAgenda();
-            MostrarAgendaServicio mas = new MostrarAgendaServicio();
-            //le paso la clase y el token 
-            ma = mas.getXml(MostrarAgenda.class, (String)cliente.getAttribute("Token"));
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Menu</title>");            
+            out.println("<title>Servlet Gestion</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1> Prueba del LOGIN</h1>");
-
-              
-            System.out.println("------------------>"+ma);
-            System.out.println(mas);
-            System.out.println(ma.getAgenda().toString());
-            out.println("<h1>Listado de las agendas</h1>");
-            Iterator<Map.Entry<String, Integer>> entries = ma.getAgenda().entrySet().iterator();
-                while (entries.hasNext()) {
-                    Map.Entry<String, Integer> entry = entries.next();
-                    out.println("<form method=\"post\" action=\"/ClienteRestFullWeb/MenuAgenda\">\n"
-                            + "<input type=\"hidden\" name=\"idAgenda\" value=\"" + entry.getValue() + "\">"
-                            + "<input type=\"submit\" value=\"" + entry.getKey() + "\" >\n"
-                            + "</form><br>");
-                }
-                 out.println("<form action=\"/ClienteRestFullWeb/CrearAgenda\" method=\"get\">\n"
-                    + "  Nombre nueva agenda: <input type=\"text\" name=\"nuevaAgenda\"><br>\n"
-                    + "  <input type=\"submit\" value=\"Crear\">\n"
-                    + "</form>");
-            out.println("<h1>Servlet Menu at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Menu:</h1>\n"
+                    + "        <form action=\"/ClienteRestFullWeb/InsertarContacto\" method=\"post\">\n"
+                    + "            <input type=\"submit\" value=\"1. Insertar Contacto\">\n"
+                    + "        </form>\n"
+                    + "        <br>\n"
+                    + "        <form action=\"/ClienteRestFullWeb/ValidarAgenda\" method=\"post\">\n"
+                    + "            <input type=\"submit\" value=\"2. Validar XSD\">\n"
+                    + "        </form>\n"
+                    + "        <br>\n"
+                    + "        <form action=\"/ClienteRestFullWeb/ValidarDTD\" method=\"post\">\n"
+                    + "            <input type=\"submit\" value=\"2. Validar Persona XSD\">\n"
+                    + "        </form>\n"
+                    + "        <br>\n"
+                    + "        <form action=\"/ClienteRestFullWeb/DevolverAgenda\" method=\"post\">\n"
+                    + "            <input type=\"submit\" value=\"4. Devolver Agenda\">\n"
+                    + "        </form>\n"
+                    + "        <br>\n"
+                    + "        <form action=\"/ClienteRestFullWeb/PedirNombre\" method=\"post\">\n"
+                    + "            <input type=\"submit\" value=\"5. Devolver Contacto\">\n"
+                    + "        </form>");
+            out.print("<br>\n" +
+"        <form action=\"/ClienteRestFullWeb/Menu\" method=\"post\">\n" +
+"            <input type=\"submit\" value=\"Volver a lista Agendas\">\n" + 
+"        </form>");
             out.println("</body>");
             out.println("</html>");
         }

@@ -8,6 +8,7 @@ package Servicios;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.HttpHeaders;
 
 /**
  * Jersey REST client generated for REST resource:ContactoServicioResource
@@ -33,16 +34,19 @@ public class ContactoServicio {
         webTarget = client.target(BASE_URI).path("contactoServicio");
     }
 
-    public <T> T enviarPersona(Class<T> responseType, String nombre) throws ClientErrorException {
+    public <T> T enviarPersona(Class<T> responseType, String nombre,String id, String token) throws ClientErrorException {
         WebTarget resource = webTarget;
+         if (id != null) {
+            resource = resource.queryParam("id", id);
+        }
         if (nombre != null) {
             resource = resource.queryParam("nombre", nombre);
         }
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).header(HttpHeaders.AUTHORIZATION, token).get(responseType);
     }
 
-    public void insertarPersona(Object requestEntity) throws ClientErrorException {
-        webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
+    public void insertarPersona(Object requestEntity, String token) throws ClientErrorException {
+        webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_XML).header(HttpHeaders.AUTHORIZATION, token).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
     public void close() {

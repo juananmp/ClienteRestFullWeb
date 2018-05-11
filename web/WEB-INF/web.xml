@@ -28,6 +28,18 @@
         <servlet-name>CrearAgenda</servlet-name>
         <servlet-class>Rest.CrearAgenda</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MenuAgenda</servlet-name>
+        <servlet-class>Rest.MenuAgenda</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertarContacto</servlet-name>
+        <servlet-class>Rest.InsertarContacto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateContacto</servlet-name>
+        <servlet-class>Rest.CreateContacto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>CrearAgenda</servlet-name>
         <url-pattern>/CrearAgenda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MenuAgenda</servlet-name>
+        <url-pattern>/MenuAgenda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertarContacto</servlet-name>
+        <url-pattern>/InsertarContacto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateContacto</servlet-name>
+        <url-pattern>/CreateContacto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,12 +5,11 @@
  */
 package Rest;
 
-import Objetos.MostrarAgenda;
-import Servicios.MostrarAgendaServicio;
+import Objetos.Contacto;
+import Objetos.PersonaObj;
+import Servicios.ContactoServicio;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author janto
  */
-public class Menu extends HttpServlet {
+public class CreateContacto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,47 +34,56 @@ public class Menu extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+       
+            /* TODO output your page here. You may use following sample code. */
+           HttpSession cliente = request.getSession();
+        
+        String nombre = request.getParameter("nombre");
+        String correo = request.getParameter("correo");
+        String telefono = request.getParameter("telefono");
+        
+        System.out.println("nombre--->"+nombre);
+        System.out.println("correoe--->"+correo);
+        System.out.println("telefono--->"+telefono);
+        
+        
+        
         try (PrintWriter out = response.getWriter()) {
-            HttpSession cliente = request.getSession();
-            
-         
-           // mas.getXml(MostrarAgendaServicio.class);
-            
-                     MostrarAgenda ma = new MostrarAgenda();
-            MostrarAgendaServicio mas = new MostrarAgendaServicio();
-            //le paso la clase y el token 
-            ma = mas.getXml(MostrarAgenda.class, (String)cliente.getAttribute("Token"));
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Menu</title>");            
+            out.println("<title>Servlet CreateContacto</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1> Prueba del LOGIN</h1>");
-
-              
-            System.out.println("------------------>"+ma);
-            System.out.println(mas);
-            System.out.println(ma.getAgenda().toString());
-            out.println("<h1>Listado de las agendas</h1>");
-            Iterator<Map.Entry<String, Integer>> entries = ma.getAgenda().entrySet().iterator();
-                while (entries.hasNext()) {
-                    Map.Entry<String, Integer> entry = entries.next();
-                    out.println("<form method=\"post\" action=\"/ClienteRestFullWeb/MenuAgenda\">\n"
-                            + "<input type=\"hidden\" name=\"idAgenda\" value=\"" + entry.getValue() + "\">"
-                            + "<input type=\"submit\" value=\"" + entry.getKey() + "\" >\n"
-                            + "</form><br>");
-                }
-                 out.println("<form action=\"/ClienteRestFullWeb/CrearAgenda\" method=\"get\">\n"
-                    + "  Nombre nueva agenda: <input type=\"text\" name=\"nuevaAgenda\"><br>\n"
-                    + "  <input type=\"submit\" value=\"Crear\">\n"
-                    + "</form>");
-            out.println("<h1>Servlet Menu at " + request.getContextPath() + "</h1>");
+            if(!nombre.isEmpty() && !correo.isEmpty() && !telefono.isEmpty()){
+            PersonaObj p = new PersonaObj();
+            p.setName(nombre);
+            p.setEmail(correo);
+            int tel = Integer.parseInt(telefono);
+            p.setTelephone(tel);
+            Contacto c = new Contacto();
+            c.setPo(p);
+            System.out.println("En pA name-->"+c.getPo().getName());
+            System.out.println("idAgenda-->"+cliente.getAttribute("idAgenda"));
+            int idAgenda = Integer.parseInt((String)cliente.getAttribute("idAgenda"));
+            c.setId_agenda(idAgenda);
+            ContactoServicio cs = new ContactoServicio();
+            String token = (String) cliente.getAttribute("Token");
+            System.out.println("Token-->"+cliente.getAttribute("Token"));
+            cs.insertarPersona(c,token);
+            out.print("Contacto Creado");
+            }else{
+                out.print("No guardado");
+            }
+            out.print("<br>\n" +
+"        <form action=\"/ClienteRestFullWeb/MenuAgenda\" method=\"post\">\n" +
+"            <input type=\"submit\" value=\"Volver a gestion\">\n" + 
+"        </form>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
