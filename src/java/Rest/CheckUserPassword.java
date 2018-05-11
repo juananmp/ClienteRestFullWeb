@@ -6,6 +6,7 @@
 package Rest;
 
 import Objetos.UsuarioObj;
+import Servicios.GetIdUser;
 import Servicios.TokenLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -79,7 +80,7 @@ public class CheckUserPassword extends HttpServlet {
         UsuarioObj uo = new UsuarioObj();
         uo.setUser(user);
         uo.setPassword(password);
-        
+        GetIdUser id = new GetIdUser();
         TokenLogin tk = new TokenLogin();
         String token = tk.putXml(uo);
 
@@ -89,8 +90,11 @@ public class CheckUserPassword extends HttpServlet {
         cliente.setAttribute("password", password);
 
         if(!token.isEmpty() && token!=""){
+            String idu = id.postXml(uo);
+            cliente.setAttribute("idUsuario", idu);
             //meto el token en la sesion para posteriormente usarlo en el menu y pasarselo a mostraragendaservicio
             cliente.setAttribute("Token", token);
+            cliente.setAttribute("NombreUser", uo.getUser());
            response.sendRedirect("/ClienteRestFullWeb/Menu");
         }else{
                  response.sendRedirect("/ClienteRestFullWeb/errorUser.html");
