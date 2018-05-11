@@ -5,6 +5,8 @@
  */
 package Rest;
 
+import Objetos.PersonaObj;
+import Servicios.ContactoServicio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author janto
  */
-public class MenuAgenda extends HttpServlet {
+public class MostrarContacto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,51 +32,34 @@ public class MenuAgenda extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               response.setContentType("text/html;charset=UTF-8");
-        String idagenda = request.getParameter("idAgenda");
+        
+         String contacto = request.getParameter("contacto");
         HttpSession cliente = request.getSession();
         
-        if(idagenda!=null){
-           cliente.setAttribute("idAgenda", idagenda); 
-        }
-        System.out.println("----------------- ID AG en MenuAgenda"+idagenda);
-       
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Gestion</title>");
+            out.println("<title>Servlet DevolverContacto</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Menu:</h1>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/InsertarContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"1. Insertar Contacto\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/ValidarAgenda\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"2. Validar XSD\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/ValidarDTD\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"2. Validar Persona XSD\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/DevolverAgenda\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"4. Devolver Agenda\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/PedirContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"5. Devolver Contacto\">\n"
-                    + "        </form>");
+            System.out.println("id-->"+cliente.getAttribute("idAgenda"));
+            System.out.println("contacto-->"+contacto);
+            System.out.println("token-->"+(String)cliente.getAttribute("Token"));
+            
+            ContactoServicio mc = new ContactoServicio();
+            out.print("Contacto: "+ mc.enviarPersona(PersonaObj.class, contacto,(String) cliente.getAttribute("idAgenda"), (String) cliente.getAttribute("Token")));
             out.print("<br>\n" +
-"        <form action=\"/ClienteRestFullWeb/Menu\" method=\"post\">\n" +
-"            <input type=\"submit\" value=\"Volver a lista Agendas\">\n" + 
+"        <form action=\"/ClienteRestFullWeb/MenuAgenda\" method=\"post\">\n" +
+"            <input type=\"submit\" value=\"Volver a gestion\">\n" + 
 "        </form>");
             out.println("</body>");
             out.println("</html>");
         }
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

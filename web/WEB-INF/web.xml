@@ -40,6 +40,14 @@
         <servlet-name>CreateContacto</servlet-name>
         <servlet-class>Rest.CreateContacto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PedirContacto</servlet-name>
+        <servlet-class>Rest.PedirContacto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostrarContacto</servlet-name>
+        <servlet-class>Rest.MostrarContacto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro</url-pattern>
@@ -79,6 +87,14 @@
     <servlet-mapping>
         <servlet-name>CreateContacto</servlet-name>
         <url-pattern>/CreateContacto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PedirContacto</servlet-name>
+        <url-pattern>/PedirContacto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostrarContacto</servlet-name>
+        <url-pattern>/MostrarContacto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

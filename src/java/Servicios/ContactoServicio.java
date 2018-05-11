@@ -34,7 +34,7 @@ public class ContactoServicio {
         webTarget = client.target(BASE_URI).path("contactoServicio");
     }
 
-    public <T> T enviarPersona(Class<T> responseType, String nombre,String id, String token) throws ClientErrorException {
+    public <T> T enviarPersona(Class<T> responseType, String nombre, String id, String token) throws ClientErrorException {
         WebTarget resource = webTarget;
          if (id != null) {
             resource = resource.queryParam("id", id);
