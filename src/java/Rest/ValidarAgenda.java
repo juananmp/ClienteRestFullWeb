@@ -5,19 +5,19 @@
  */
 package Rest;
 
+import Servicios.ValidarAgendaServicio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author janto
  */
-public class MenuAgenda extends HttpServlet {
+public class ValidarAgenda extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,47 +30,26 @@ public class MenuAgenda extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               response.setContentType("text/html;charset=UTF-8");
-        String idagenda = request.getParameter("idAgenda");
-        HttpSession cliente = request.getSession();
-        
-        if(idagenda!=null){
-           cliente.setAttribute("idAgenda", idagenda); 
-        }
-        System.out.println("----------------- ID AG en MenuAgenda"+idagenda);
-       
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            ValidarAgendaServicio va = new ValidarAgendaServicio();
+            String idA = request.getParameter("idA");
+             String b = va.ValAgenda(idA);
+//////                        System.out.println(b);
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Gestion</title>");
+            out.println("<title>Servlet ValidarDTD</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Menu:</h1>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/InsertarContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"1. Insertar Contacto\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/ValidarAgenda\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"2. Validar Agenda\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/RecogerContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"3. Validar Persona \">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/DevolverAgenda\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"4. Devolver Agenda\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/PedirContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"5. Devolver Contacto\">\n"
-                    + "        </form>");
-            out.print("<br>\n" +
-"        <form action=\"/ClienteRestFullWeb/Menu\" method=\"post\">\n" +
-"            <input type=\"submit\" value=\"Volver a lista Agendas\">\n" + 
-"        </form>");
+            out.println("<h1>La Agenda es: " + b+ "</h1>");
+            out.println("<form action='/ClienteRestFullWeb/MenuAgenda' method='POST'>");
+               
+                out.println("<input type='submit' value='Volver Página inicial'>");
+            out.println("</form>");
+            out.println("<h1>Servlet ValidarDTD at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

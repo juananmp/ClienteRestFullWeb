@@ -5,19 +5,20 @@
  */
 package Rest;
 
+import Objetos.PersonaObj;
+import Servicios.ValidarPersonaServicio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author janto
  */
-public class MenuAgenda extends HttpServlet {
+public class ValidarPersona extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,47 +31,35 @@ public class MenuAgenda extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               response.setContentType("text/html;charset=UTF-8");
-        String idagenda = request.getParameter("idAgenda");
-        HttpSession cliente = request.getSession();
-        
-        if(idagenda!=null){
-           cliente.setAttribute("idAgenda", idagenda); 
-        }
-        System.out.println("----------------- ID AG en MenuAgenda"+idagenda);
-       
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+           ValidarPersonaServicio val = new ValidarPersonaServicio();
+            PersonaObj p = new PersonaObj();
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Gestion</title>");
+            out.println("<title>Servlet ServletValidarPersona</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Menu:</h1>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/InsertarContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"1. Insertar Contacto\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/ValidarAgenda\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"2. Validar Agenda\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/RecogerContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"3. Validar Persona \">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/DevolverAgenda\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"4. Devolver Agenda\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/PedirContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"5. Devolver Contacto\">\n"
-                    + "        </form>");
-            out.print("<br>\n" +
-"        <form action=\"/ClienteRestFullWeb/Menu\" method=\"post\">\n" +
-"            <input type=\"submit\" value=\"Volver a lista Agendas\">\n" + 
-"        </form>");
+                    String name = request.getParameter("nombre");
+           
+        String email = request.getParameter("correo");
+        
+        int telephone = Integer.parseInt((String) request.getParameter("telefono"));
+         p.setName(name);
+        p.setEmail(email);
+        p.setTelephone(telephone);
+         // out.println("<h1>El usuario: " + name+"Se ha creado correctamente"+ "</h1>");
+            System.out.println(name+" "+ email +" "+ telephone);
+         out.println(val.ValPersona(email,Integer.toString(telephone),name));
+         out.println("<form action='/ClienteRestFullWeb/MenuAgenda' method='POST'>");
+             
+
+          out.println("<input type='submit' value='Volver Página inicial'>");
+            out.println("</form>");
+       
+            out.println("<h1>Servlet ServletValidarPersona at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

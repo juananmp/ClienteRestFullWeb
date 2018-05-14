@@ -48,6 +48,22 @@
         <servlet-name>MostrarContacto</servlet-name>
         <servlet-class>Rest.MostrarContacto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ValidarAgenda</servlet-name>
+        <servlet-class>Rest.ValidarAgenda</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ValidarPersona</servlet-name>
+        <servlet-class>Rest.ValidarPersona</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RecogerContacto</servlet-name>
+        <servlet-class>Rest.RecogerContacto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DevolverAgenda</servlet-name>
+        <servlet-class>Rest.DevolverAgenda</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro</url-pattern>
@@ -95,6 +111,22 @@
     <servlet-mapping>
         <servlet-name>MostrarContacto</servlet-name>
         <url-pattern>/MostrarContacto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidarAgenda</servlet-name>
+        <url-pattern>/ValidarAgenda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidarPersona</servlet-name>
+        <url-pattern>/ValidarPersona</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecogerContacto</servlet-name>
+        <url-pattern>/RecogerContacto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverAgenda</servlet-name>
+        <url-pattern>/DevolverAgenda</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
