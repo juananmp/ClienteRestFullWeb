@@ -61,11 +61,13 @@ public class Menu extends HttpServlet {
             out.println("<h1>Listado de las agendas</h1>");
             Iterator<Map.Entry<String, Integer>> entries = ma.getAgenda().entrySet().iterator();
                 while (entries.hasNext()) {
+                    
                     Map.Entry<String, Integer> entry = entries.next();
                     out.println("<form method=\"post\" action=\"/ClienteRestFullWeb/MenuAgenda\">\n"
                             + "<input type=\"hidden\" name=\"idAgenda\" value=\"" + entry.getValue() + "\">"
                             + "<input type=\"submit\" value=\"" + entry.getKey() + "\" >\n"
                             + "</form><br>");
+                    System.out.println(entry.getValue() + "entry value---------");
                 }
                  out.println("<form action=\"/ClienteRestFullWeb/CrearAgenda\" method=\"get\">\n"
                     + "  Nombre nueva agenda: <input type=\"text\" name=\"nuevaAgenda\"><br>\n"

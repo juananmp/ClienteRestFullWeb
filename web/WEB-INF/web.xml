@@ -64,6 +64,14 @@
         <servlet-name>DevolverAgenda</servlet-name>
         <servlet-class>Rest.DevolverAgenda</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BorrarContacto</servlet-name>
+        <servlet-class>Rest.BorrarContacto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PasarNombre</servlet-name>
+        <servlet-class>Rest.PasarNombre</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro</url-pattern>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>DevolverAgenda</servlet-name>
         <url-pattern>/DevolverAgenda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BorrarContacto</servlet-name>
+        <url-pattern>/BorrarContacto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasarNombre</servlet-name>
+        <url-pattern>/PasarNombre</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
