@@ -11,13 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author janto
  */
-public class MenuAgenda extends HttpServlet {
+public class UpdateDatos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,55 +29,30 @@ public class MenuAgenda extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               response.setContentType("text/html;charset=UTF-8");
-        String idagenda = request.getParameter("idAgenda");
-        HttpSession cliente = request.getSession();
-        
-        if(idagenda!=null){
-             System.out.println("-----------------dentro if  "+idagenda);
-           cliente.setAttribute("idAgenda", idagenda); 
-        }
-        System.out.println("----------------- ID AG en MenuAgenda"+idagenda);
-       
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Gestion</title>");
+            out.println("<title>Servlet UpdateDatos</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Menu:</h1>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/InsertarContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"1. Insertar Contacto\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/ValidarAgenda\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"2. Validar Agenda\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/RecogerContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"3. Validar Persona \">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/DevolverAgenda\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"4. Devolver Agenda\">\n"
-                    + "        </form>\n"
-                    + "        <br>\n"
-                    + "        <form action=\"/ClienteRestFullWeb/PedirContacto\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"5. Devolver Contacto\">\n"
-                    + "        </form>"
-                    + "        <form action=\"/ClienteRestFullWeb/PasarNombre\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"6. Borrar Contacto\">\n"
-                    + "        </form>"
-                    + "        <form action=\"/ClienteRestFullWeb/UpdateDatos\" method=\"post\">\n"
-                    + "            <input type=\"submit\" value=\"7. Actualizar Contacto\">\n"
-                    + "        </form>");
-            out.print("<br>\n"
-                    +
-"        <form action=\"/ClienteRestFullWeb/Menu\" method=\"post\">\n" +
-"            <input type=\"submit\" value=\"Volver a lista Agendas\">\n" + 
+            out.println("<h1>Introduzca los nuevos datos del contacto, es obligatorio rellenar los campos"+ "</h1>");
+            out.println("<h1>EL ID deberá ser el del contacto a sustituir"+ "</h1>");
+            
+            out.println("<form action=\"/ClienteRestFullWeb/AplicarUpdate\" method=\"get\">\n"
+                    + "  Nombre: <input type=\"text\" name=\"nombre\"><br>\n"
+                    + "  Correo: <input type=\"text\" name=\"correo\"><br>\n"
+                    + "  Telefono: <input type=\"text\" name=\"telefono\"><br>\n"
+                    + "  ID: <input type=\"text\" name=\"id\"><br>\n"
+                    + "  <input type=\"submit\" value=\"Actualizar\">\n"
+                    + "</form>");
+             out.print("<br>\n" +
+"        <form action=\"/ClienteRestFullWeb/MenuAgenda\" method=\"post\">\n" +
+"            <input type=\"submit\" value=\"Volver a gestion\">\n" + 
 "        </form>");
+            out.println("<h1>Servlet UpdateDatos at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

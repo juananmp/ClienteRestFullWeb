@@ -72,6 +72,14 @@
         <servlet-name>PasarNombre</servlet-name>
         <servlet-class>Rest.PasarNombre</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateDatos</servlet-name>
+        <servlet-class>Rest.UpdateDatos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AplicarUpdate</servlet-name>
+        <servlet-class>Rest.AplicarUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro</url-pattern>
@@ -143,6 +151,14 @@
     <servlet-mapping>
         <servlet-name>PasarNombre</servlet-name>
         <url-pattern>/PasarNombre</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDatos</servlet-name>
+        <url-pattern>/UpdateDatos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AplicarUpdate</servlet-name>
+        <url-pattern>/AplicarUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
