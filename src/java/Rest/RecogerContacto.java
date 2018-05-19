@@ -46,7 +46,7 @@ public class RecogerContacto extends HttpServlet {
                     + "  Nombre: <input type=\"text\" name=\"nombre\"><br>\n"
                     + "  Correo: <input type=\"text\" name=\"correo\"><br>\n"
                     + "  Telefono: <input type=\"text\" name=\"telefono\"><br>\n"
-                    + "  <input type=\"submit\" value=\"Crear\">\n"
+                    + "  <input type=\"submit\" value=\"Validar\">\n"
                     + "</form>");
            
           out.println("<input type='submit' value='Volver Página inicial'>");
