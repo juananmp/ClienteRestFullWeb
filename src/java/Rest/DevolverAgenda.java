@@ -48,7 +48,11 @@ public class DevolverAgenda extends HttpServlet {
             out.println("<title>Servlet DevolverAgenda</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>"+ea.getXml(AgendaObject.class, token, idA)+ idA+"</h1>");
+            out.println("<h1>"+ea.getXml(AgendaObject.class,  token,idA)+ idA+"</h1>");
+            out.println("<form action=\"/ClienteRestFullWeb/MenuAgenda\" method=\"post\">\n"
+                   
+                    + "  <input type=\"submit\" value=\"Volver al Menu\">\n"
+                    + "</form>");
             out.println("<h1>Servlet DevolverAgenda at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");

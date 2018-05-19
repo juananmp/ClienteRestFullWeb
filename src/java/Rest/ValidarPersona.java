@@ -52,7 +52,12 @@ public class ValidarPersona extends HttpServlet {
         p.setTelephone(telephone);
          // out.println("<h1>El usuario: " + name+"Se ha creado correctamente"+ "</h1>");
             System.out.println(name+" "+ email +" "+ telephone);
-         out.println(val.ValPersona(email,Integer.toString(telephone),name));
+               try{
+               out.println("Validacion: "+val.ValPersona(name,email,Integer.toString(telephone)));
+            }catch(Exception e){
+              out.println("Validacion: NO VALIDO");   
+            }
+         //out.println(val.ValPersona(name,email,Integer.toString(telephone)));
          out.println("<form action='/ClienteRestFullWeb/MenuAgenda' method='POST'>");
              
 

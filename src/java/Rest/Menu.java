@@ -37,14 +37,14 @@ public class Menu extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession cliente = request.getSession();
-            
+            String nombre = request.getParameter("nombre");
          
            // mas.getXml(MostrarAgendaServicio.class);
             
                      MostrarAgenda ma = new MostrarAgenda();
             MostrarAgendaServicio mas = new MostrarAgendaServicio();
             //le paso la clase y el token 
-            ma = mas.getXml(MostrarAgenda.class, (String)cliente.getAttribute("Token"));
+            ma = mas.getXml(MostrarAgenda.class, nombre,(String)cliente.getAttribute("Token"));
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");

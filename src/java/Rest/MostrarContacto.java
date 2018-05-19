@@ -50,7 +50,7 @@ public class MostrarContacto extends HttpServlet {
             System.out.println("token-->"+(String)cliente.getAttribute("Token"));
             
             ContactoServicio mc = new ContactoServicio();
-            out.print("Contacto: "+ mc.enviarPersona(PersonaObj.class, contacto,(String) cliente.getAttribute("idAgenda"), (String) cliente.getAttribute("Token")));
+            out.print("Contacto: "+ mc.enviarPersona(PersonaObj.class,(String) cliente.getAttribute("idAgenda"),  contacto,(String) cliente.getAttribute("Token")));
             out.print("<br>\n" +
 "        <form action=\"/ClienteRestFullWeb/MenuAgenda\" method=\"post\">\n" +
 "            <input type=\"submit\" value=\"Volver a gestion\">\n" + 

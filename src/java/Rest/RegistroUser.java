@@ -64,20 +64,20 @@ public class RegistroUser extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
           try (PrintWriter out = response.getWriter()) {
-            
+          //  HttpSession cliente = request.getSession();
             String user = request.getParameter("user");
             String password = request.getParameter("password");
-             
+          //   String token= (String)cliente.getAttribute("token");
             out.println("<h4>" + user + "</h4>");
             out.println("<h4>" + password + "</h4>");
 
-            UsuarioObj u = new UsuarioObj();
+            UsuarioObj usu = new UsuarioObj();
 
-            u.setUser(user);
-            u.setPassword(password);
+            usu.setUser(user);
+            usu.setPassword(password);
            
-            CreateUser c = new CreateUser();
-            c.putXml(u);
+            CreateUser cr = new CreateUser();
+            cr.putXml(usu,usu.getUser(),usu.getPassword());
            response.sendRedirect("/ClienteRestFullWeb/exitoRegistro.html");
            
 

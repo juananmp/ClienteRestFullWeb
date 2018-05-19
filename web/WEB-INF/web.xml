@@ -80,6 +80,14 @@
         <servlet-name>AplicarUpdate</servlet-name>
         <servlet-class>Rest.AplicarUpdate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ValidarAgendaSin</servlet-name>
+        <servlet-class>Rest.ValidarAgendaSin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ValidarPersonaSin</servlet-name>
+        <servlet-class>Rest.ValidarPersonaSin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro</url-pattern>
@@ -159,6 +167,14 @@
     <servlet-mapping>
         <servlet-name>AplicarUpdate</servlet-name>
         <url-pattern>/AplicarUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidarAgendaSin</servlet-name>
+        <url-pattern>/ValidarAgendaSin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidarPersonaSin</servlet-name>
+        <url-pattern>/ValidarPersonaSin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

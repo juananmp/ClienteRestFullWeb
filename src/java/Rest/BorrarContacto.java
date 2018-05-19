@@ -43,7 +43,7 @@ public class BorrarContacto extends HttpServlet {
        String idA = (String)cliente.getAttribute("idAgenda");
          System.out.println("cliente " + idA);
        String token = (String)cliente.getAttribute("Token");
- //-       try (PrintWriter out = response.getWriter()) {
+ //      try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");

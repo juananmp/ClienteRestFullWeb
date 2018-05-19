@@ -5,22 +5,19 @@
  */
 package Rest;
 
-import Objetos.ListaContacto;
-import Objetos.PersonaObj;
-import Servicios.UpdateServicio;
+import Servicios.ValidarAgendaSinAutenticar;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author janto
  */
-public class AplicarUpdate extends HttpServlet {
+public class ValidarAgendaSin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,48 +31,22 @@ public class AplicarUpdate extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PersonaObj p = new PersonaObj();
-        UpdateServicio up = new UpdateServicio();
         try (PrintWriter out = response.getWriter()) {
-            HttpSession cliente = request.getSession();
-             String token = (String)cliente.getAttribute("Token");
-
-            
-            
-         // out.println("<h1>El usuario: " + name+"Se ha creado correctamente"+ "</h1>");
-           
-        
-       
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AplicarUpdate</title>");            
+            out.println("<title>Servlet ValidarAgendaSin</title>");            
             out.println("</head>");
             out.println("<body>");
-                       
-            String name = request.getParameter("nombre");
-           
-        String email = request.getParameter("correo");
-        
-        int telephone = Integer.parseInt((String) request.getParameter("telefono"));
-         String id = request.getParameter("id");
-        p.setName(name);
-        p.setEmail(email);
-        p.setTelephone(telephone);
-//            ListaContacto lo = new ListaContacto();
-//            lo.getIdContacto().add(id);
-//            lo.getPersona().add(p);
-              p.getName();
-        p.getEmail();
-        p.getTelephone(); 
-            up.putXml(p, token, id);
-            out.println("<h1> Se ha actualizado correctamente el contecto");
-            out.println("<form action='/ClienteRestFullWeb/MenuAgenda' method='POST'>");
-             
-
-          out.println("<input type='submit' value='Volver Página inicial'>");
-            out.println("</form>");
-            out.println("<h1>Servlet AplicarUpdate at " + request.getContextPath() + "</h1>");
+            ValidarAgendaSinAutenticar va = new ValidarAgendaSinAutenticar();
+            String agenda = request.getParameter("agenda");
+            out.print("<h1>La agenda es" +va.ValAgenda(agenda) + "</h1>");
+//            out.println(
+//"        <form action=\"/ClienteRestFullWeb/CheckUserPassword\" method=\"post\">\n" +
+//"            <input type=\"submit\" value=\"Volver a Pagina Inicial\">\n" + 
+//"        </form>");
+            out.println("<h1>Servlet ValidarAgendaSin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
